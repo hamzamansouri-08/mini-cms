@@ -26,3 +26,6 @@ Route::get('/bienvenue', function () {
 Route::get('/heure', function () {
     return view('heure');
 });
+Route::get('/a-propos', function () {
+    return view('a-propos');
+});
