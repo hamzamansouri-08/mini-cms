@@ -72,3 +72,10 @@ Ouvrir ensuite http://localhost:8000 (adresse de l'application, différente de l
 | Méthode | URI | Réponse |
 |---|---|---|
 | GET | `/a-propos` | Vue `a-propos` avec le nom de l'auteur et le groupe |
+## 6. Historique depuis lab-01
+
+Nombre de commits depuis lab-01 :
+
+Fichiers modifiés depuis lab-01 :
+
+Ce que git tag -n affiche pour lab-01 :
