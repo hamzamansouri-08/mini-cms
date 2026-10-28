@@ -3,18 +3,13 @@
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PageController::class, 'home'])
-    ->name('home');
+Route::get('/', [PageController::class, 'home'])->name('home');
 
-Route::get('/a-propos', [PageController::class, 'about'])
-    ->name('about');
+Route::get('/a-propos', [PageController::class, 'about'])->name('about');
 
 Route::get('/heure', function () {
     return view('heure', [
         'heure' => now()->format('H:i'),
         'date' => now()->format('d/m/Y'),
     ]);
-})->name('heure');
-
-Route::view('/version', 'version')
-    ->name('version');
+});
