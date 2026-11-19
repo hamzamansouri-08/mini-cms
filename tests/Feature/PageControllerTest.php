@@ -9,7 +9,7 @@ test('the home page renders inside the shared layout', function () {
 
 test('the about page displays the configured author and group', function () {
     $this->get(route('about'))
-        ->assertSee('Prenom Nom')
+        ->assertSee('Hamza Mansouri')
         ->assertSee('MDW32');
 });
 
