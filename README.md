@@ -6,13 +6,13 @@ Auteur : hamza mansouri, groupe MDW32.
 
 Mini-CMS évoluera au fil du semestre vers une petite plateforme de publication : pages publiques, back-office authentifié, API JSON et tests Pest. Chaque session se termine par un tag Git (`lab-01`, `lab-01b`, puis un tag par session).
 
-## État actuel (tag lab-05)
+## État actuel (tag lab-05b)
 
-- Validation des articles dans `StorePostRequest` et `UpdatePostRequest` (`$request->validated()`) : plus aucune règle dans le contrôleur.
-- Messages flash après création, modification, suppression et publication, affichés par le layout avec `x-alert`.
-- Middleware `EnsureSiteIsWritable` (alias `writable`) : avec `SITE_READ_ONLY=true` dans `.env`, les requêtes d'écriture reçoivent une erreur 503.
-- Page « Article introuvable » (404) pour un article inexistant, rendue depuis `withExceptions` dans `bootstrap/app.php` ; les autres 404 gardent la page standard.
-- Tests Pest : `PostPagesTest`, `PostWriteTest`, `PostRelationsTest`, `PostTaxonomyTest` et `PostFeedbackTest`.
+- Back-office des catégories et des tags sous `/admin`, avec CRUD protégé par le middleware `writable`.
+- Form Requests `StoreCategoryRequest`, `UpdateCategoryRequest`, `StoreTagRequest` et `UpdateTagRequest`.
+- Messages de validation traduits en français dans `lang/fr/validation.php`.
+- Pages 404 et 503 affichées dans le layout du site.
+- Tests Pest étendus au back-office, aux erreurs de validation et au mode lecture seule.
 
 ## Données de démonstration
 
@@ -107,6 +107,12 @@ Ouvrir ensuite http://localhost:8000 (adresse de l'application, différente de l
 ![Page d'un article avec le message flash « Article créé. »](screenshots/s09-message-flash.png)
 
 ![Page Article introuvable pour un identifiant inexistant](screenshots/s09-article-introuvable.png)
+
+### Session 10
+
+![Validation en français du back-office](screenshots/s10-validation-fr.png)
+
+![Pages d'erreur intégrées au layout](screenshots/s10-pages-erreur.png)
 
 ## Routes disponibles
 
