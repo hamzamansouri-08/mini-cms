@@ -6,13 +6,14 @@ Auteur : hamza mansouri, groupe MDW32.
 
 Mini-CMS évoluera au fil du semestre vers une petite plateforme de publication : pages publiques, back-office authentifié, API JSON et tests Pest. Chaque session se termine par un tag Git (`lab-01`, `lab-01b`, puis un tag par session).
 
-## État actuel (tag lab-05b)
+## État actuel (tag lab-06)
 
-- Back-office des catégories et des tags sous `/admin`, avec CRUD protégé par le middleware `writable`.
-- Form Requests `StoreCategoryRequest`, `UpdateCategoryRequest`, `StoreTagRequest` et `UpdateTagRequest`.
-- Messages de validation traduits en français dans `lang/fr/validation.php`.
-- Pages 404 et 503 affichées dans le layout du site.
-- Tests Pest étendus au back-office, aux erreurs de validation et au mode lecture seule.
+- Comptes écrits à la main : inscription (`/inscription`), connexion (`/connexion`) et déconnexion, avec `Hash::make`, `Auth::attempt` et la régénération de la session.
+- Colonne `role` (`author` par défaut, `admin`). Après `php artisan migrate:fresh --seed`, le compte de démonstration `test@example.com` (mot de passe `password`) est administrateur.
+- Écritures et back-office réservés aux utilisateurs connectés (middleware `auth`) ; chaque nouvel article est attaché à son auteur.
+- Gate `manage-categories` : seuls les administrateurs gèrent les catégories.
+- `PostPolicy` : un auteur modifie et supprime ses articles, un administrateur tous les articles.
+- Tests Pest : `PostPagesTest`, `PostWriteTest`, `PostRelationsTest`, `PostTaxonomyTest`, `PostFeedbackTest`, `AdminTaxonomyTest`, `AuthTest` et `AuthorizationTest`.
 
 ## Données de démonstration
 
@@ -132,7 +133,12 @@ Ouvrir ensuite http://localhost:8000 (adresse de l'application, différente de l
 | PUT | `/posts/{post}` | `posts.update` | `PostController@update` |
 | DELETE | `/posts/{post}` | `posts.destroy` | `PostController@destroy` |
 | PATCH | `/posts/{post}/publication` | `posts.publication` | `PostController@togglePublication` |
-| PATCH | `/posts/{post}/publication` | `posts.publication` | `PostController@togglePublication` |
+| GET | `/inscription` | `register` | `Auth\RegisterController@create` |
+| POST | `/inscription` | `register.store` | `Auth\RegisterController@store` |
+| GET | `/connexion` | `login` | `Auth\LoginController@create` |
+| POST | `/connexion` | `login.store` | `Auth\LoginController@store` |
+| POST | `/deconnexion` | `logout` | `Auth\LoginController@destroy` |
+| GET | `/mes-articles` | `my-posts` | `PostController@mine` |
 ## 6. Historique depuis lab-01
 
 Nombre de commits depuis lab-01 :
